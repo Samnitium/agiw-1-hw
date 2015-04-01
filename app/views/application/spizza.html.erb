@@ -27,9 +27,10 @@
 
   <body>
 
-    <div id="h" style="height: 100px !important; min-height: 0px;">
+    <div id="h" style="height: 100px !important; min-height: 0px; float: left; position:relative;">
       <div class="logo">
-        <h2><a href="/" style="color: white;"><u>SPIZZA</u></a> - <%= @docs.count %> DOCS FOUND</h2>
+        <div style="position:absolute; left: 30px; top: 10px;"><h2><a href="/" style="color: white;"><u>SPIZZA</u></a></h2></div>
+        <div style="position:absolute; right: 30px; top: 10px;"><h2><%= @docs.count %> DOCS FOUND<% if @spellcheck %> - FORSE SPIZZAVI <a href="/spizza?q=<%= @spellcheck %>" style="color: white;"><u><%= @spellcheck.try(:upcase) %></u></a><% end %></h2></div>
       </div>
     </div>
     <% @docs.each do |doc| %>
