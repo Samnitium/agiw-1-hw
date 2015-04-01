@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def suggest
-    render json: JSON.load(open("http://localhost:8983/solr/new_core/suggest?q=#{params[:q]}&wt=json&indent=true"))['spellcheck']['suggestions'][1]['suggestion'].map{|v| {value: v}}
+    render json: JSON.load(open("http://localhost:8983/solr/new_core/suggest?q=#{params[:q]}&wt=json&indent=true"))['spellcheck']['suggestions'][1]['suggestion'].reject{|v| ['jsonp', 'jsonline'].include?(v)}.map{|v| {value: v}}
   end
 
   def spizza
