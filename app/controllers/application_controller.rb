@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def spizza
     @docs = JSON.load(open("http://localhost:8983/solr/new_core/select?q=#{params[:q]}&wt=json&indent=true&rows=#{(500..700).to_a.sample}"))['response']['docs']
-    @spellcheck = JSON.load(open("http://localhost:8983/solr/new_core/spell?wt=json&indent=true&spellcheck=true&spellcheck.q=#{params[:q]}"))['spellcheck']['suggestions'].try(:[], 1).try(:[], 'suggestion').try(:first)
+    @spellcheck = JSON.load(open("http://localhost:8983/solr/new_core/spell?wt=json&indent=true&spellcheck=true&spellcheck.q=#{URI.encode(params[:q])}"))['spellcheck']['suggestions'].try(:[], 1).try(:[], 'suggestion').try(:first)
   end
 
 end
