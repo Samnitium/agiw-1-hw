@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/favicon.ico">
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/ionicons.min.css" rel="stylesheet">
+    <link href="assets/style.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div id="h" style="height: 100px !important; min-height: 0px;">
+      <div class="logo">
+        <h2><a href="/" style="color: white;"><u>SPIZZA</u></a> - <%= @docs.count %> DOCS FOUND</h2>
+      </div>
+    </div>
+    <% @docs.each do |doc| %>
+      <div class="container">
+        <div class="row" style="padding: 15px 5px;">
+          <a href="<%= doc['id']%>"> <h4 style="color: black;"><%= doc['title'] %></h4></a>
+          <span><a href="<%= doc['id']%>"><%= doc['id']%></a></span> - <span><%= doc['content_anal'].truncate(367) %></span>
+        </div><!--/row-->
+        <hr>
+      </div><!-- /.container -->
+    <% end %>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap.min.js"></script>
+    <script src="assets/retina-1.1.0.js"></script>
+    <script src="assets/jquery.hoverdir.js"></script>
+    <script src="assets/jquery.hoverex.min.js"></script>
+    <script src="assets/jquery.prettyPhoto.js"></script>
+    <script src="assets/jquery.isotope.min.js"></script>
+    <script src="assets/custom.js"></script>
+
+  </body>
+</html>
