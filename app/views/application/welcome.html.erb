@@ -150,19 +150,23 @@ $(document).ready(function(){
   var bestPictures = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote: '../suggest?q=/%QUERY.json'
+    remote: {
+      url: '../suggest.json?q=%QUERY',
+      wildcard: '%QUERY'
+    }
   });
    
   bestPictures.initialize();
    
   $('#thesearch .autosuggest').typeahead({
-    minLength: 2
+    minLength: 1
   }, {
     name: 'suggestions',
-    displayKey: 'value',
     source: bestPictures.ttAdapter(),
     templates: {
-      suggestion: Handlebars.compile('<p>{{value}}</p>')
+      suggestion: function(data) {
+        return '<p>' + data + '</p>'
+      }
     }
   });
 

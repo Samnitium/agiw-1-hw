@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   end
 
   def suggest
-    render json: JSON.load(CSV.read("most_used.csv").to_json)
+    filtered = CSV.read("most_used_10k.csv").select{|row| row[0].start_with? URI.encode(params[:q])}.map{|row| row[0]}
+    render json: filtered
   end
 
   def spizza
