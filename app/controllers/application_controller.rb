@@ -3,13 +3,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception, except: [:spizza]
   require 'open-uri'
+  require 'csv'
+  require 'json'
 
   def welcome
 
   end
 
   def suggest
-    render json: JSON.load(open("http://localhost:8983/solr/new_core/suggest?q=#{params[:q]}&wt=json&indent=true"))['spellcheck']['suggestions'][1]['suggestion'].reject{|v| ['jsonp', 'jsonline'].include?(v)}.map{|v| {value: v}}
+    render json: JSON.load(CSV.read("most_used.csv").to_json)
   end
 
   def spizza
