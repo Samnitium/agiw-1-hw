@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   require 'open-uri'
   require 'csv'
   require 'json'
+  require 'neography'
+
+  before_filter :connect_neo4j
 
   def welcome
 
@@ -16,8 +19,35 @@ class ApplicationController < ActionController::Base
   end
 
   def spizza
-    @docs = JSON.load(open("http://localhost:8983/solr/new_core/select?q=#{URI.encode(params[:q])}&wt=json&indent=true&rows=#{(500..700).to_a.sample}"))['response']['docs']
-    @spellcheck = JSON.load(open("http://localhost:8983/solr/new_core/spell?wt=json&indent=true&spellcheck=true&spellcheck.q=#{URI.encode(params[:q])}"))['spellcheck']['suggestions'].try(:[], 1).try(:[], 'suggestion').try(:first)
+    query = "MATCH (p)-[r:tag_count]-(n:Tag) WHERE n.name = '#{params['q']}' WITH p, r ORDER BY r.count desc RETURN p.username, r.count"
+    @results = @neo.execute_query(query)['data']
+
+    @images = JSON.load(open("https://api.instagram.com/v1/tags/#{params['q']}/media/recent?client_id=9d5a15aab64f407c941c470fad47c289"))['data']
+  end
+
+
+  def connect_neo4j
+    Neography.configure do |config|
+      config.protocol             = "http"
+      config.server               = "52.17.242.13"
+      config.port                 = 7474
+      config.directory            = ""  # prefix this path with '/'
+      config.cypher_path          = "/cypher"
+      config.gremlin_path         = "/ext/GremlinPlugin/graphdb/execute_script"
+      config.log_file             = "neography.log"
+      config.log_enabled          = false
+      config.slow_log_threshold   = 0    # time in ms for query logging
+      config.max_threads          = 20
+      config.authentication       = nil  # 'basic' or 'digest'
+      config.username             = 'neo4j'
+      config.password             = 'password'
+      config.parser               = MultiJsonParser
+      config.http_send_timeout    = 1200
+      config.http_receive_timeout = 1200
+      config.persistent           = true
+      end
+
+    @neo ||= Neography::Rest.new
   end
 
 end

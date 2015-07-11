@@ -29,19 +29,34 @@
 
     <div id="h" style="height: 100px !important; min-height: 0px; float: left; position:relative;">
       <div class="logo" style="padding-bottom:0px !important;">
-        <div style="position:absolute; left: 30px; top: 10px;"><h2><a href="/" style="color: white;"><u>SPIZZA</u></a></h2></div>
-        <div style="position:absolute; right: 30px; top: 10px;"><h2><%= @docs.count %> DOCS FOUND<% if @spellcheck %> - FORSE SPIZZAVI <a href="/spizza?q=<%= @spellcheck %>" style="color: white;"><u><%= @spellcheck.try(:upcase) %></u></a><% end %></h2></div>
+        <div style="position:absolute; left: 30px; top: 10px;"><h2><a href="/" style="color: white;">Instatag</a></h2></div>
+        <div style="position:absolute; right: 30px; top: 10px;"><h2><%= @results.count %> USERS FOUND</h2></div>
       </div>
     </div>
-    <% @docs.each do |doc| %>
-      <div class="container">
-        <div class="row" style="padding: 15px 5px;">
-          <a href="<%= doc['id']%>"> <h4 style="color: black;"><%= doc['title'] %></h4></a>
-          <span><a href="<%= doc['id']%>"><%= doc['id']%></a></span> - <span><%= doc['content_anal'].split(' ').drop(8).join(' ').truncate(267) %></span>
-        </div><!--/row-->
-        <hr>
-      </div><!-- /.container -->
-    <% end %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <% @results.each do |doc| %>
+          <div class="container">
+            <div class="row" style="padding: 15px 5px;">
+              <a href="<%= :id %>"> <h4 style="color: black;"><%= doc.inspect %></h4></a>
+              <span><a href="<%= :id %>"><%= :id %></a></span> - <span><%= :top %></span>
+            </div>
+            <hr>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <% @images.each do |doc| %>
+          <div class="container">
+            <div class="row" style="padding: 15px 5px;">
+            <img src="<%= doc['images']['low_resolution']['url'] %>">
+            </div>
+            <hr>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

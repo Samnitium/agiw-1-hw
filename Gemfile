@@ -30,6 +30,10 @@ gem 'rails_12factor', group: :production
 gem "non-stupid-digest-assets", group: :production
 
 gem 'pry'
+
+gem 'neography'
+
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
