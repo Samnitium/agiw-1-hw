@@ -166,13 +166,13 @@ input {
 
 .btn-primary {
   color: #191410;
-  background-color: #CEC77E;
+  background-color: #F5F1A0;
   border-color: #191410;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
   color: #221415;
-  background-color: #F5F1A0;
+  background-color: #E86A86;
   border-color: #221415;
 }
 
@@ -213,6 +213,7 @@ input {
 /* HEADER SECTION */
 #h {
 	background: url(../assets/header.jpg) no-repeat center top;
+	background-size: 100% 100%;
 	padding-top: 5px;
 	background-attachment: relative;
 	background-position: center center;
