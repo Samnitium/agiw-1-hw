@@ -164,6 +164,17 @@ input {
 	color: #2f2f2f;
 }
 
+.btn-primary {
+  color: #191410;
+  background-color: #CEC77E;
+  border-color: #191410;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
+  color: #221415;
+  background-color: #F5F1A0;
+  border-color: #221415;
+}
 
 
 .dmbutton:hover,
@@ -328,6 +339,7 @@ input {
 	padding-top: 25px;
 	padding-bottom: 25px;
 	background-color: #22A7F0;
+	background-image: url("http://host2post.com/server13/photos/vinQpDxWRLoXYM~/camera-rainbow-instagram.jpg");
 }
 
 #f i {
