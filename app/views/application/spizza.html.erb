@@ -26,33 +26,47 @@
   </head>
 
   <body>
-
-    <div id="h" style="height: 100px !important; min-height: 0px; float: left; position:relative;">
-      <div class="logo" style="padding-bottom:0px !important;">
-        <div style="position:absolute; left: 30px; top: 10px;"><h2><a href="/" style="color: white;">Instatag</a></h2></div>
-        <div style="position:absolute; right: 30px; top: 10px;"><h2><%= @results.count %> USERS FOUND</h2></div>
+    <div class="row">
+      <div id="h" style="height: 100px !important; min-height: 0px; float: left; position:relative;">
+        <div class="logo" style="padding-bottom:0px !important;">
+          <div style="position:absolute; left: 30px; top: 10px;"><h2><a href="/" style="color: white;">Instatag</a></h2></div>
+          <div style="position:absolute; right: 30px; top: 10px;"><h2><%= @results.count %> USERS FOUND</h2></div>
+        </div>
       </div>
     </div>
 
+
     <div class="row">
       <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h2 class="text-center">MOST USED BY</h2>
+          </div>
+        </div>
         <% @results.each do |doc| %>
-          <div class="container">
-            <div class="row" style="padding: 15px 5px;">
-              <a href="<%= :id %>"> <h4 style="color: black;"><%= doc.inspect %></h4></a>
-              <span><a href="<%= :id %>"><%= :id %></a></span> - <span><%= :top %></span>
+          <div class="row">
+            <div class="col-md-5" style="height: 90px; padding: 0 0 0 140px;"><img style="width:90px;" src="<%= doc[1] %>"></div>
+            <div class="col-md-7" style="padding-top: 35px;"><span><a href="https://instagram.com/<%= doc[0] %>" target="_blank"><%= doc[0] %></a></span> - count: <%= doc[2] %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <hr style="margin: 10px;">
             </div>
-            <hr>
           </div>
         <% end %>
       </div>
       <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h2 class="text-center">IMAGES BY TAG</h2>
+          </div>
+        </div>
         <% @images.each do |doc| %>
-          <div class="container">
-            <div class="row" style="padding: 15px 5px;">
-            <img src="<%= doc['images']['low_resolution']['url'] %>">
-            </div>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+            <img src="<%= doc['images']['low_resolution']['url'] %>" style="width: 240px; padding-left: 60px;">
             <hr>
+            </div>
           </div>
         <% end %>
       </div>

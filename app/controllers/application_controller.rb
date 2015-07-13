@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def spizza
-    query = "MATCH (p)-[r:tag_count]-(n:Tag) WHERE n.name = '#{params['q']}' WITH p, r ORDER BY r.count desc RETURN p.username, r.count"
+    query = "MATCH (p)-[r:tag_count]-(n:Tag) WHERE n.name = '#{params['q']}' WITH p, r ORDER BY r.count desc RETURN p.username, p.profile_picture, r.count"
     @results = @neo.execute_query(query)['data']
 
     @images = JSON.load(open("https://api.instagram.com/v1/tags/#{params['q']}/media/recent?client_id=9d5a15aab64f407c941c470fad47c289"))['data']
